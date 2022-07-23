@@ -8,12 +8,12 @@ const generateMarkdown = require("./utils/generateMarkdown");
 const questions = [
   {
     type: "input",
-    name: "GitHub",
+    name: "github",
     message: "What is your GitHub username?",
   },
   {
     type: "input",
-    name: "title",
+    name: "email",
     message: "What is your email?",
   },
   {
@@ -25,11 +25,6 @@ const questions = [
     type: "input",
     name: "description",
     message: "Please provide a description of your project:",
-  },
-  {
-    type: "input",
-    name: "toc",
-    message: "Please provide a table of contents:",
   },
   {
     type: "input",
@@ -45,15 +40,7 @@ const questions = [
     type: "list",
     name: "license",
     message: "Please choose what licenses your project should have:",
-    choices: [
-      "Academic",
-      "Artistic",
-      "Creative Commons",
-      "ISC",
-      "MIT",
-      "Open Software",
-      "None",
-    ],
+    choices: ["Creative Commons", "ISC", "MIT", "Do WTF You Want To", "None"],
   },
   {
     type: "input",
@@ -66,18 +53,20 @@ const questions = [
     name: "tests",
     message: "What command should be used to run tests:",
   },
-  {
-    type: "input",
-    name: "questions",
-    message: "Please provide usage instructions for your project:",
-  },
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+  return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+  inquirer.prompt(questions).then((inquirerResponses) => {
+    console.log("Generating README, one moment please");
+    writeToFile("README.md", generateMarkdown({ ...inquirerResponses }));
+  });
+}
 
 // Function call to initialize app
 init();
