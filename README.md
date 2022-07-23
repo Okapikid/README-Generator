@@ -11,7 +11,7 @@ By responding to the questions provided, a user will generate a README file for 
 - Usage Instructions
 - Licenses
 - Contribution Instructions
-  \*Testing
+- Testing
 
 A video walkthrough of the project is included in the submission<br>
 <br>
